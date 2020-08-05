@@ -2,8 +2,10 @@
 
 #include <kernel/tty.h>
 
-void kernel_main(void) {
+void kernel_main(void) 
+{
+    int a=22387;
 	terminal_initialize();
-	printf("Hello, kernel World!\n");
+    printf("Integer - %d\n",a);
 }
 
