@@ -5,12 +5,10 @@
 
 void kernel_main(void) 
 {
-    int a=22387;
-    
-    //__asm__("xchg %bx, %bx");
-    
 	terminal_initialize();
-    printf("Integer - %d\n",a);
+    printf("Terminal Initialized\n");
+
     init_gdt();
+    printf("GDT Initialized\n");
 }
 

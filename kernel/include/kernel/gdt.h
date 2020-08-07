@@ -4,21 +4,23 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-typedef struct gdt_entry
+struct gdt_entry_struct
 {
-    uint16_t limit_low;                 //lower 16 bits of limit
-    uint16_t base_low;                  //lower 16 bits of base
-    uint8_t base_mid;                   //middle 8 bits of base
-    uint8_t base_high;                  //last 8 bits of base
-    uint8_t access;                     //the access flag - contains information regarding Ring Level, Descriptor Type and Segment Type(Dat or Code)
-    uint8_t granularity;                //the granularity flag - contains information regarding granularity and operand size
-}gdt_entry_t;
+   uint16_t limit_low;           // The lower 16 bits of the limit.
+   uint16_t base_low;            // The lower 16 bits of the base.
+   uint8_t  base_mid;            // The mid 8 bits of the base.
+   uint8_t  access;              // Access flags ----> Determines Ring Level
+   uint8_t  granularity;
+   uint8_t  base_high;           // The last 8 bits of the base.
+} __attribute__((packed));
+typedef struct gdt_entry_struct gdt_entry_t;
 
-typedef struct gdt_ptr
+struct gdt_ptr_struct
 {
-    uint16_t size;
-    uint32_t offset;
-}gdt_ptr_t;
+   uint16_t limit;               // The upper 16 bits of all selector limits.
+   uint32_t base;                // The address of the first gdt_entry_t struct.
+} __attribute__((packed));
+typedef struct gdt_ptr_struct gdt_ptr_t;
 
 extern void flush_gdt(uint32_t);        //function written in assembly
 void init_gdt();

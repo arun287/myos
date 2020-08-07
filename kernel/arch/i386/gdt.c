@@ -12,8 +12,8 @@ gdt_ptr_t gdt_ptr;
  *********************************************************/
 void init_gdt()
 {
-    gdt_ptr.size = (sizeof(gdt_entry_t)*5) - 1;
-    gdt_ptr.offset = (uint32_t)&gdt_entries[0];
+    gdt_ptr.limit = (sizeof(gdt_entry_t)*5) - 1;
+    gdt_ptr.base = (uint32_t)&gdt_entries;
 
     gdt_insert(0, 0, 0, 0, 0);                      //Null Segment
     gdt_insert(1, 0, 0xFFFFFFFF, 0x9A, 0xCF);       //Kernel Code Segment
@@ -21,16 +21,7 @@ void init_gdt()
     gdt_insert(3, 0, 0xFFFFFFFF, 0xFA, 0xCF);       //User Code Segment
     gdt_insert(4, 0, 0xFFFFFFFF, 0xF2, 0xCF);       //User Data Segment
 
-    //asm volatile ("xchg %bx, %bx");
-    //extern flush_gdt();
-    printf("Inside init_gdt()\n");
     flush_gdt((uint32_t)&gdt_ptr);                  //loads the GDT pointer
-    //__asm__("movl 4(%esp), %edx");
-    //__asm__("lgdt (%edx)");
-    //__asm__("movw $0x10,%ax");
-    //__asm__("movw %ax, %ds");
-    //__asm__("movw %ax, %es");
-
 }
 
 /* Function adds entries into the GDT */
