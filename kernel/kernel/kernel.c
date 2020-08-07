@@ -2,6 +2,7 @@
 
 #include "../include/kernel/tty.h"
 #include "../include/kernel/gdt.h"
+#include "../include/kernel/idt.h"
 
 void kernel_main(void) 
 {
@@ -10,5 +11,10 @@ void kernel_main(void)
 
     init_gdt();
     printf("GDT Initialized\n");
-}
 
+    init_idt();
+    printf("IDT Initialized\n");
+
+    asm volatile ("int $0x3");
+    asm volatile ("int $0x10");
+}

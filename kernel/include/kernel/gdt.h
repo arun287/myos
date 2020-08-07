@@ -10,7 +10,7 @@ struct gdt_entry_struct
    uint16_t base_low;            // The lower 16 bits of the base.
    uint8_t  base_mid;            // The mid 8 bits of the base.
    uint8_t  access;              // Access flags ----> Determines Ring Level
-   uint8_t  granularity;
+   uint8_t  granularity;         // Granularity ----> Determines Block Size
    uint8_t  base_high;           // The last 8 bits of the base.
 } __attribute__((packed));
 typedef struct gdt_entry_struct gdt_entry_t;
