@@ -1,6 +1,10 @@
+#include "../../../libc/include/libssp.h"
+#include "../../../libc/include/stdlib.h"
+#include "../../../libc/include/stdio.h"
+#include "../../../libc/include/system.h"
+#include "../../../libc/include/string.h"
+
 #include "../../include/kernel/gdt.h"
-#include <stdint.h>
-#include <stdio.h>
 
 gdt_entry_t gdt_entries[5];
 gdt_ptr_t gdt_ptr;

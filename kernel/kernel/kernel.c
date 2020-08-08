@@ -14,7 +14,4 @@ void kernel_main(void)
 
     init_idt();
     printf("IDT Initialized\n");
-
-    asm volatile ("int $0x3");
-    asm volatile ("int $0x10");
 }

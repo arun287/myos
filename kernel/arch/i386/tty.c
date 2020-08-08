@@ -1,8 +1,8 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
-#include <string.h>
-
+#include "../../../libc/include/stdio.h"
+#include "../../../libc/include/string.h"
 #include "../../include/kernel/tty.h"
 
 #include "vga.h"
