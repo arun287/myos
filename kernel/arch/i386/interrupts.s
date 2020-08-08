@@ -34,11 +34,14 @@
 .extern irq14_handler
 .extern irq15_handler
 
+.extern pit_callback
+
 isr0:
 	pusha
 	cld
 	call irq0_handler
 	popa
+    sti
 	iret
  
 isr1:

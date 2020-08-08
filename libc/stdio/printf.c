@@ -3,6 +3,8 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
 
 static bool print(const char* data, size_t length) 
 {
@@ -75,6 +77,38 @@ int printf(const char* restrict format, ...)
 
 			written += len;
 		}
+        /*else if (*format == 'd') 
+        {
+		  format++;
+		  int num = va_arg(parameters, int);
+		  char buf[32];
+		  char* numString = itoa(num, buf, 10);
+		  size_t len = strlen(numString);
+
+		  if (maxrem < len)
+              return -1;
+
+		  if (!print(numString, len))
+		    return -1;
+		} 
+        else if (*format == 'x') 
+        {
+		  format++;
+		  uint32_t num = va_arg(parameters, uint32_t);
+		  char buf[32];
+		  char* numString = utoa(num, buf, 16);
+		  size_t len = strlen(numString);
+
+		  if (maxrem+2 < len)
+		    return -1;
+
+		  if (!print("0x", 2))
+		    return -1;
+
+		  if (!print(numString, len))
+		    return -1;
+		  
+		}*/       
         else if(*format == 'd')
         {
             format++;

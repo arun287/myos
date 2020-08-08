@@ -35,8 +35,8 @@ void init_idt()
     outb(PIC_SLAVE_DATA, ICW4);
 
     //Enable all IRQ's
-    outb(PIC_MASTER_DATA, 0x0);
-    outb(PIC_SLAVE_DATA, 0x0);
+    outb(PIC_MASTER_DATA, 0x00);
+    outb(PIC_SLAVE_DATA, 0x00);
 
     //Inserting Interrupt Servive Routines into IDT
     idt_insert(32, (uint32_t)isr0, 0x08, 0x8E);

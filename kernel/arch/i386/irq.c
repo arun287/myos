@@ -7,10 +7,11 @@
 #include "../../../libc/include/string.h"
 
 #include "../../include/kernel/pic.h"
+#include "../../include/kernel/pit.h"
 
 void irq0_handler(void) 
 {
-    printf("Inside IRQ 0\n");
+    pit_callback(); 
     outb(PIC_MASTER_COMMAND, PIC_EOI);
 }
  
