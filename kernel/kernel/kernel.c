@@ -17,6 +17,6 @@ void kernel_main(void)
     printf("IDT Initialized\n");
 
     init_timer(100); 
-
+    
     while(1);
 }

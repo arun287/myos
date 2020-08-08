@@ -114,27 +114,45 @@ int printf(const char* restrict format, ...)
             format++;
 
             int num = (int)va_arg(parameters,int);
-
             int rev = 0;
+            int len = 0;
+
             while(num>0)
             {
                 rev *= 10;
                 rev += num%10;
                 num /= 10;
+                len++;
             }
 
+            int count = 0;
             while(rev > 0)
             {
+                count++;
                 char c = (char)(rev%10 + 48);
                 rev /= 10;
                 
                 if (!maxrem) 
-				return -1;
+				    return -1;
 			
 			    if (!print(&c, sizeof(c)))
-				return -1;
+				    return -1;
 
 			    written++;
+            }
+
+            while(count<len)
+            {
+                char c = '0';
+                
+                if(!maxrem)
+                    return -1;
+
+                if(!print(&c, sizeof(c)))
+                    return -1;
+
+                written++;
+                count++;
             }
         }
         else 
