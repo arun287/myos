@@ -8,6 +8,7 @@
 
 #include "../../include/kernel/pic.h"
 #include "../../include/kernel/pit.h"
+#include "../../include/kernel/kb.h"
 
 void irq0_handler(void) 
 {
@@ -17,7 +18,7 @@ void irq0_handler(void)
  
 void irq1_handler(void) 
 {
-	printf("Inside IRQ 1\n");
+    kb_callback();
     outb(PIC_MASTER_COMMAND, PIC_EOI);
 }
 

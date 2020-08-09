@@ -40,6 +40,7 @@ string/memmove.o \
 string/memset.o \
 string/strlen.o \
 system/outb.o \
+system/inb.o \
 libssp/__stack_chk_fail.o \
 
 HOSTEDOBJS=\
