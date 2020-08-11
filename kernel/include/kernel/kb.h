@@ -5,5 +5,6 @@
 #define KB_CNTRL_REG 0x64
 
 void kb_callback();
+void init_kb();
 
 #endif

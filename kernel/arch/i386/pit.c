@@ -3,6 +3,7 @@
 #include "../../../libc/include/system.h"
 
 #include "../../include/kernel/pit.h"
+#include "../../include/kernel/irq.h"
 
 uint32_t tick = 0;
 
@@ -15,6 +16,8 @@ void pit_callback()
 
 void init_timer(uint32_t frequency)
 {
+    register_handler(IRQ0, &pit_callback);
+
     uint32_t divisor = 1193180 / frequency;
     
     //Send the command byte

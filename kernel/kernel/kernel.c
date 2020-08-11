@@ -4,6 +4,7 @@
 #include "../include/kernel/gdt.h"
 #include "../include/kernel/idt.h"
 #include "../include/kernel/pit.h"
+#include "../include/kernel/kb.h"
 
 void kernel_main(void) 
 {
@@ -16,7 +17,10 @@ void kernel_main(void)
     init_idt();
     printf("IDT Initialized\n");
 
-    //init_timer(100); 
+    init_kb();
+    printf("Keyboard Initialised\n");
+
+    init_timer(100); 
     
     while(1);
 }

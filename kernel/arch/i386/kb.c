@@ -3,6 +3,7 @@
 #include "../../../libc/include/system.h"
 
 #include "../../include/kernel/kb.h"
+#include "../../include/kernel/irq.h"
 
 unsigned char kdbus[128] =
 {
@@ -51,4 +52,9 @@ void kb_callback()
 
     if(!(scancode & 0x80))
         printf("%c", kdbus[scancode]);
+}
+
+void init_kb()
+{
+    register_handler(IRQ1, &kb_callback);
 }
