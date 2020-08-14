@@ -77,38 +77,42 @@ int printf(const char* restrict format, ...)
 
 			written += len;
 		}
-        /*else if (*format == 'd') 
-        {
-		  format++;
-		  int num = va_arg(parameters, int);
-		  char buf[32];
-		  char* numString = itoa(num, buf, 10);
-		  size_t len = strlen(numString);
-
-		  if (maxrem < len)
-              return -1;
-
-		  if (!print(numString, len))
-		    return -1;
-		} 
         else if (*format == 'x') 
         {
-		  format++;
-		  uint32_t num = va_arg(parameters, uint32_t);
-		  char buf[32];
-		  char* numString = utoa(num, buf, 16);
-		  size_t len = strlen(numString);
+		    format++;
+		    uint32_t num = (uint32_t)va_arg(parameters, uint32_t);
 
-		  if (maxrem+2 < len)
-		    return -1;
+            if (maxrem < 2)
+		        return -1;
 
-		  if (!print("0x", 2))
-		    return -1;
+            if (!print("0x", 2))
+		        return -1;
 
-		  if (!print(numString, len))
-		    return -1;
-		  
-		}*/       
+            written+=2;
+
+            char buf[8];
+            for(int i=0; i<8; i++)
+            {
+                uint32_t temp = num;
+                temp = temp>>(28 - 4*i);
+                temp &= 0x0000000F;
+                if(temp<10)
+                    buf[i] = (char)(temp + 48);
+                else
+                    buf[i] = (char)(65 + (temp-10));
+            }
+
+            for(int i=0; i<8; i++)
+            {
+                if(!maxrem)
+                    return -1;
+
+                if(!print(&buf[i],1))
+                    return -1;
+
+                written++;
+            }
+		}       
         else if(*format == 'd')
         {
             format++;

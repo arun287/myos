@@ -10,8 +10,6 @@ uint32_t tick = 0;
 void pit_callback()
 {
     tick++;
-    if(tick%100 == 0)
-        printf("Tick - %d\n",tick);
 }
 
 void init_timer(uint32_t frequency)

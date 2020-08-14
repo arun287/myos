@@ -20,7 +20,7 @@ void register_handler(uint8_t int_num, irq_ptr handler)
 
 void irq0_handler(void) 
 {
-    interrupt_handlers[IRQ0](); 
+    //interrupt_handlers[IRQ0](); 
     outb(PIC_MASTER_COMMAND, PIC_EOI);
 }
  

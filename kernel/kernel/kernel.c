@@ -1,3 +1,4 @@
+#include <stdint.h>
 #include <stdio.h>
 
 #include "../include/kernel/tty.h"
@@ -5,6 +6,8 @@
 #include "../include/kernel/idt.h"
 #include "../include/kernel/pit.h"
 #include "../include/kernel/kb.h"
+#include "../include/kernel/paging.h"
+#include "../include/kernel/kheap.h"
 
 void kernel_main(void) 
 {
@@ -18,9 +21,13 @@ void kernel_main(void)
     printf("IDT Initialized\n");
 
     init_kb();
-    printf("Keyboard Initialised\n");
+    printf("Keyboard Initialized\n");
 
-    init_timer(100); 
+    init_paging();
+    printf("Paging Initialized\n");
+
+    //init_timer(100); 
+    //printf("PIT Initialized\n");
     
     while(1);
 }
