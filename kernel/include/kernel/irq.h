@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#define IRQ_PAGE_FAULT 14
+
 #define IRQ0  32
 #define IRQ1  33
 #define IRQ2  34

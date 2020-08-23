@@ -10,12 +10,18 @@
 #include "../../include/kernel/pit.h"
 #include "../../include/kernel/kb.h"
 #include "../../include/kernel/irq.h"
+#include "../../include/kernel/paging.h"
 
 irq_ptr interrupt_handlers[256];
 
 void register_handler(uint8_t int_num, irq_ptr handler)
 {
     interrupt_handlers[int_num] = handler;
+}
+
+void irq_page_fault(void)
+{
+    interrupt_handlers[IRQ_PAGE_FAULT]();
 }
 
 void irq0_handler(void) 

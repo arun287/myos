@@ -112,8 +112,7 @@ void init_paging()
         i+=0x1000;
     }
 
-    //register_handler(14, &page_fault);
-
+    register_handler(IRQ_PAGE_FAULT, &page_fault);
     switch_page_dir(kernel_directory);    
 }
 
@@ -123,7 +122,7 @@ void switch_page_dir(page_directory_t *dir)
     asm volatile("mov %0, %%cr3":: "r"(&dir->tablesPhy));
     uint32_t cr0;
     asm volatile("mov %%cr0, %0": "=r"(cr0));
-    cr0 |= 0x80000000; // Enable paging!
+    cr0 |= 0x80000000;
     asm volatile("mov %0, %%cr0":: "r"(cr0));
 }
 
@@ -144,4 +143,14 @@ page_t *get_page(uint32_t address, int make, page_directory_t *dir)
     }
     else
         return 0;
+}
+
+void page_fault()
+{
+    uint32_t faulting_address;
+    asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
+
+    printf("Page Fault - %x\n",faulting_address);
+
+    while(1);
 }

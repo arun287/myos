@@ -1,5 +1,7 @@
 .global flush_idt
 
+.global isr_page_fault
+
 .global isr0
 .global isr1
 .global isr2
@@ -16,6 +18,8 @@
 .global isr13
 .global isr14
 .global isr15
+
+.extern irq_page_fault
 
 .extern irq0_handler
 .extern irq1_handler
@@ -34,14 +38,18 @@
 .extern irq14_handler
 .extern irq15_handler
 
-.extern pit_callback
+isr_page_fault:
+    pusha
+    cld
+    call irq_page_fault
+    popa
+    iret
 
 isr0:
 	pusha
 	cld
 	call irq0_handler
 	popa
-    sti
 	iret
  
 isr1:
