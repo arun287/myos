@@ -2,6 +2,7 @@
 #define _KERNEL_PAGING_H
 
 #include <stdint.h>
+#include <stdlib.h>
 
 typedef struct page{
     uint32_t present    :1;         // Is page present in mem
@@ -32,7 +33,7 @@ typedef struct page_dir{
     uint32_t phyAddr;               // Physical address of tablesPhy
 }page_directory_t;
 
-void init_paging();
+void init_vmm();
 void switch_page_dir(page_directory_t *);
 page_t *get_page(uint32_t, int, page_directory_t *);
 void page_fault();

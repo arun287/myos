@@ -1,6 +1,3 @@
-#include <stdint.h>
-#include <stdlib.h>
-
 #include "../../include/kernel/kheap.h"
 
 extern uint32_t end;

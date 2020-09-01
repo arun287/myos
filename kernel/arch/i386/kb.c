@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include "../../../libc/include/stdio.h"
 #include "../../../libc/include/system.h"
 

@@ -1,5 +1,3 @@
-#include <stdint.h>
-
 #include "../../../libc/include/libssp.h"
 #include "../../../libc/include/stdlib.h"
 #include "../../../libc/include/stdio.h"
@@ -10,7 +8,7 @@
 #include "../../include/kernel/pit.h"
 #include "../../include/kernel/kb.h"
 #include "../../include/kernel/irq.h"
-#include "../../include/kernel/paging.h"
+#include "../../include/kernel/vmm.h"
 
 irq_ptr interrupt_handlers[256];
 

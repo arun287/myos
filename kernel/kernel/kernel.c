@@ -6,7 +6,8 @@
 #include "../include/kernel/idt.h"
 #include "../include/kernel/pit.h"
 #include "../include/kernel/kb.h"
-#include "../include/kernel/paging.h"
+#include "../include/kernel/pmm.h"
+#include "../include/kernel/vmm.h"
 #include "../include/kernel/kheap.h"
 
 void kernel_main(void) 
@@ -23,8 +24,11 @@ void kernel_main(void)
     init_kb();
     printf("Keyboard Initialized\n");
 
-    init_paging();
-    printf("Paging Initialized\n");
+    init_pmm(0x1000000);
+    printf("Physical Memory Management Initialized\n");
+
+    init_vmm();
+    printf("Virtual Memory Management (Paging) Initialized\n");
 
     //init_timer(100); 
     //printf("PIT Initialized\n");

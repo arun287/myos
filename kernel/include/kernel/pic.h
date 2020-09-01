@@ -1,6 +1,8 @@
 #ifndef _KERNEL_PIC_H
 #define _KERNEL_PIC_H
 
+#include <stdint.h>
+
 #define PIC_MASTER_COMMAND 0x20
 #define PIC_MASTER_DATA 0x21
 
