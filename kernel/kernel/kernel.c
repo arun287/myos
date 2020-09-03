@@ -24,7 +24,7 @@ void kernel_main(void)
     init_kb();
     printf("Keyboard Initialized\n");
 
-    init_pmm(0x1000000);
+    init_pmm(0x1000000); //assuming 16MB memory space
     printf("Physical Memory Management Initialized\n");
 
     init_vmm();
