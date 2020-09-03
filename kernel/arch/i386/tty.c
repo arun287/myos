@@ -1,12 +1,8 @@
 #include "../../../libc/include/stdio.h"
 #include "../../../libc/include/string.h"
 #include "../../include/kernel/tty.h"
+#include "../../include/kernel/vga.h"
 
-#include "vga.h"
-
-static const size_t VGA_WIDTH = 80;
-static const size_t VGA_HEIGHT = 25;
-static uint16_t* const VGA_MEMORY = (uint16_t*) 0xB8000;
 
 static size_t terminal_row;
 static size_t terminal_column;
@@ -17,7 +13,7 @@ void terminal_initialize(void)
 {
 	terminal_row = 0;
 	terminal_column = 0;
-	terminal_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+	terminal_color = vga_entry_color(VGA_COLOR_BLUE, VGA_COLOR_BLACK);
 	terminal_buffer = VGA_MEMORY;
 	for (size_t y = 0; y < VGA_HEIGHT; y++)
     {
@@ -27,6 +23,8 @@ void terminal_initialize(void)
 			terminal_buffer[index] = vga_entry(' ', terminal_color);
 		}
 	}
+
+    update_cursor(0,0);
 }
 
 void terminal_setcolor(uint8_t color) 
@@ -38,6 +36,7 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 {
 	const size_t index = y * VGA_WIDTH + x;
 	terminal_buffer[index] = vga_entry(c, color);
+    update_cursor(x,y);
 }
 
 void terminal_putchar(char c) 
@@ -96,7 +95,9 @@ void terminal_putchar(char c)
 void terminal_write(const char* data) 
 {
 	for (size_t i = 0; i < strlen(data); i++)
-		terminal_putchar(data[i]);
+        terminal_putchar(data[i]);
+
+    update_cursor(terminal_column,terminal_row);
 }
 
 void terminal_clear()
@@ -109,5 +110,7 @@ void terminal_clear()
 			terminal_buffer[index] = vga_entry(' ', terminal_color);
 		}
 	}
+
+    update_cursor(0,0);
 }
  
