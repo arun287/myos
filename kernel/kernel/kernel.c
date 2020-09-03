@@ -10,10 +10,15 @@
 #include "../include/kernel/vmm.h"
 #include "../include/kernel/kheap.h"
 
+extern void enable_A20();
+
 void kernel_main(void) 
 {
 	terminal_initialize();
     printf("Terminal Initialized\n");
+    
+    enable_A20();
+    printf("A20 Enabled\n");        
 
     init_gdt();
     printf("GDT Initialized\n");
