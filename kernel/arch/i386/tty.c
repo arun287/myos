@@ -98,4 +98,16 @@ void terminal_write(const char* data)
 	for (size_t i = 0; i < strlen(data); i++)
 		terminal_putchar(data[i]);
 }
+
+void terminal_clear()
+{
+	for (size_t y = 0; y < VGA_HEIGHT; y++)
+    {
+		for (size_t x = 0; x < VGA_WIDTH; x++)
+        {
+			const size_t index = y * VGA_WIDTH + x;
+			terminal_buffer[index] = vga_entry(' ', terminal_color);
+		}
+	}
+}
  

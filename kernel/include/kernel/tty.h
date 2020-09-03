@@ -8,6 +8,7 @@
 void terminal_initialize(void);
 void terminal_putchar(char c);
 void terminal_write(const char* data);
+void terminal_clear();
 
 #endif
 
